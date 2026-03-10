@@ -1,0 +1,28 @@
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-field label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 8px 16px;
+  border: 1px solid #777777;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: #000;
+}

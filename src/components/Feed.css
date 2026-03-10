@@ -1,0 +1,43 @@
+﻿.feed-overlay {
+  inset: 0;
+  width: 800px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.feed-overlay header {
+  background: #7695EC;
+  width: 100%;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 22px;
+  padding: 27px;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 24px;
+  gap: 24px;
+}
+
+.new-post {
+  border: 1px solid #999999;
+  border-radius: 16px;
+  padding: 24px;
+  gap: 24px;
+}
+
+.new-post h4 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.new-post label {
+  font-size: 16px;
+  font-weight: 400;
+}
