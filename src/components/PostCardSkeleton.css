@@ -1,0 +1,47 @@
+.post-card-skeleton {
+  border: 1px solid #999999;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.post-card-skeleton-header {
+  background: #b8c8f5;
+  padding: 24px;
+}
+
+.post-card-skeleton-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-card-skeleton-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.sk {
+  background: linear-gradient(90deg, #d0d0d0 25%, #e8e8e8 50%, #d0d0d0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+
+.post-card-skeleton-header .sk {
+  background: linear-gradient(90deg, #a0b8f0 25%, #c0d0f8 50%, #a0b8f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.sk-post-title { height: 24px; width: 50%; }
+.sk-author     { height: 14px; width: 25%; }
+.sk-time       { height: 14px; width: 20%; }
+.sk-line       { height: 14px; width: 100%; }
+.sk-line-short { width: 70%; }
