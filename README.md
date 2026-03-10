@@ -2,6 +2,17 @@
 
 A social feed application built as a frontend engineering test for CodeLeap. Users can create, edit, and delete posts on a shared network.
 
+## Demo
+
+<!-- Add your demo video here once recorded -->
+> 📹 Demo video coming soon.
+
+## Live App
+
+The app is deployed on Vercel and accessible at:
+
+> 🔗 (https://codeleap-network-two.vercel.app/)
+
 ## Tech Stack
 
 - **React 18** — UI library, hooks only (no classes)
@@ -31,6 +42,42 @@ npm run build
 # Preview the production build locally
 npm run preview
 ```
+
+## Deploying to Vercel
+
+### Option A — Vercel CLI
+
+```bash
+# Install the Vercel CLI globally
+npm install -g vercel
+
+# Deploy from the project root
+vercel
+```
+
+Log in when the browser opens, accept all defaults (Vercel detects Vite automatically), and your app will be live. For subsequent deploys:
+
+```bash
+vercel --prod
+```
+
+### Option B — Vercel Dashboard (no CLI)
+
+1. Push the project to a GitHub repository:
+   ```bash
+   git add .
+   git commit -m "initial commit"
+   git remote add origin <your-github-repo-url>
+   git push -u origin main
+   ```
+
+2. Go to [vercel.com](https://vercel.com) → **Add New Project** → import the GitHub repo
+
+3. Leave all build settings as default — Vercel detects Vite automatically:
+   - **Build command:** `vite build`
+   - **Output directory:** `dist`
+
+4. Click **Deploy**. Every push to `main` will trigger an automatic re-deploy.
 
 ## Core Features
 
