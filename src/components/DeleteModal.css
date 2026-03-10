@@ -12,8 +12,7 @@
   background: #fff;
   border-radius: 16px;
   padding: 24px;
-  width: 100%;
-  width: 660px;
+  width: min(660px, calc(100% - 32px));
   display: flex;
   flex-direction: column;
   gap: 24px;

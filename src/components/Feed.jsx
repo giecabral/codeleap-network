@@ -10,7 +10,7 @@ import EditModal from './EditModal.jsx'
 import Toast from './Toast.jsx'
 import './Feed.css'
 
-const SKELETON_MOCK = [1, 2, 3]
+const SKELETON_MOCK = [1, 2]
 
 export default function Feed({ username }) {
   const queryClient = useQueryClient()

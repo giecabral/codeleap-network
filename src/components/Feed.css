@@ -1,6 +1,6 @@
 ﻿.feed-overlay {
   inset: 0;
-  width: 800px;
+  width: min(800px, 100%);
   margin: 0 auto;
   background: #FFFFFF;
   display: flex;
@@ -15,6 +15,18 @@
   font-weight: 700;
   font-size: 22px;
   padding: 27px;
+}
+
+@media (max-width: 600px) {
+  .feed-overlay header {
+    font-size: 18px;
+    padding: 16px;
+  }
+
+  .feed {
+    padding: 16px;
+    gap: 16px;
+  }
 }
 
 .feed {
