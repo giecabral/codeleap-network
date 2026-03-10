@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { fetchPosts, createPost, deletePost } from '../api.js'
+import { fetchPosts, createPost, updatePost, deletePost } from '../api.js'
 import { useToast } from '../hooks/useToast.js'
 import CreatePost from './CreatePost.jsx'
 import PostCard from './PostCard.jsx'
 import PostCardSkeleton from './PostCardSkeleton.jsx'
 import DeleteModal from './DeleteModal.jsx'
+import EditModal from './EditModal.jsx'
 import Toast from './Toast.jsx'
 import './Feed.css'
 
@@ -14,6 +15,7 @@ const SKELETON_MOCK = [1, 2, 3]
 export default function Feed({ username }) {
   const queryClient = useQueryClient()
   const [deletingPost, setDeletingPost] = useState(null)
+  const [editingPost, setEditingPost] = useState(null)
   const { toast, showToast } = useToast()
 
   const { data, isLoading, isError } = useQuery({
@@ -30,6 +32,16 @@ export default function Feed({ username }) {
     onError: () => showToast('Failed to create post. Try again.', 'error'),
   })
 
+  const updateMutation = useMutation({
+    mutationFn: ({ id, title, content }) => updatePost(id, { title, content }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['posts'] })
+      setEditingPost(null)
+      showToast('Post updated!', 'success')
+    },
+    onError: () => { showToast('Failed to update post. Try again.', 'error'); setEditingPost(null) },
+  })
+
   const deleteMutation = useMutation({
     mutationFn: deletePost,
     onSuccess: () => {
@@ -40,7 +52,7 @@ export default function Feed({ username }) {
     onError: () => { showToast('Failed to delete post. Try again.', 'error'); setDeletingPost(null) },
   })
 
-  const posts = [...(data ?? [])].sort(
+  const posts = [...(data?.results ?? [])].sort(
     (a, b) => new Date(b.created_datetime) - new Date(a.created_datetime)
   )
 
@@ -64,11 +76,22 @@ export default function Feed({ username }) {
             key={post.id}
             post={post}
             currentUsername={username}
-            onEdit={() => { }}
+            onEdit={() => setEditingPost(post)}
             onDelete={() => setDeletingPost(post)}
           />
         ))}
       </div>
+
+      {editingPost && (
+        <EditModal
+          post={editingPost}
+          onClose={() => setEditingPost(null)}
+          onSave={(title, content) =>
+            updateMutation.mutate({ id: editingPost.id, title, content })
+          }
+          isLoading={updateMutation.isPending}
+        />
+      )}
 
       {deletingPost && (
         <DeleteModal
