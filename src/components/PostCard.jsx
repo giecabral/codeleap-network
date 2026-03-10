@@ -1,5 +1,5 @@
-import EditIcon from '../public/EditIcon'
-import TrashIcon from '../public/TrashIcon'
+import EditIcon from '../../public/EditIcon'
+import TrashIcon from '../../public/TrashIcon'
 import { timeAgo } from '../utils/date'
 import './PostCard.css'
 
