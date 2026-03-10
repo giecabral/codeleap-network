@@ -40,6 +40,10 @@ export default function Feed({ username }) {
     onError: () => { showToast('Failed to delete post. Try again.', 'error'); setDeletingPost(null) },
   })
 
+  const posts = [...(data ?? [])].sort(
+    (a, b) => new Date(b.created_datetime) - new Date(a.created_datetime)
+  )
+
   return (
     <div className="feed-overlay">
       <header>CodeLeap Network</header>
@@ -55,7 +59,7 @@ export default function Feed({ username }) {
         {isLoading && SKELETON_MOCK.map((i) => <PostCardSkeleton key={i} />)}
         {isError && <p>Failed to load posts.</p>}
 
-        {data?.map((post) => (
+        {posts.map((post) => (
           <PostCard
             key={post.id}
             post={post}
