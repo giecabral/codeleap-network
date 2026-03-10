@@ -1,0 +1,74 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: #dddddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #CCCCCC;
+  padding: 24px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.modal h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #000;
+}
+
+.modal label {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.modal input {
+  width: 100%;
+  padding: 8px 16px;
+  border: 1px solid #777777;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.modal input:focus {
+  border-color: #000000;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.btn-primary {
+  background: #7695ec;
+  color: #fff;
+  min-width: 111px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-primary:disabled {
+  background-color: #555555;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #5a7de8;
+}
