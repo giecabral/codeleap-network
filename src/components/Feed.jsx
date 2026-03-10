@@ -5,8 +5,10 @@ import { useToast } from '../hooks/useToast.js'
 import CreatePost from './CreatePost.jsx'
 import PostCard from './PostCard.jsx'
 import PostCardSkeleton from './PostCardSkeleton.jsx'
+import FeedControls from './FeedControls.jsx'
 import DeleteModal from './DeleteModal.jsx'
 import EditModal from './EditModal.jsx'
+import EmptyState from './EmptyState.jsx'
 import Toast from './Toast.jsx'
 import './Feed.css'
 
@@ -16,6 +18,8 @@ export default function Feed({ username }) {
   const queryClient = useQueryClient()
   const [deletingPost, setDeletingPost] = useState(null)
   const [editingPost, setEditingPost] = useState(null)
+  const [search, setSearch] = useState('')
+  const [sortOrder, setSortOrder] = useState('desc')
   const { toast, showToast } = useToast()
 
   const { data, isLoading, isError } = useQuery({
@@ -52,9 +56,14 @@ export default function Feed({ username }) {
     onError: () => { showToast('Failed to delete post. Try again.', 'error'); setDeletingPost(null) },
   })
 
-  const posts = [...(data?.results ?? [])].sort(
-    (a, b) => new Date(b.created_datetime) - new Date(a.created_datetime)
-  )
+  const posts = [...(data?.results ?? [])]
+    .filter((post) =>
+      post.username.toLowerCase().includes(search.toLowerCase())
+    )
+    .sort((a, b) => {
+      const diff = new Date(b.created_datetime) - new Date(a.created_datetime)
+      return sortOrder === 'desc' ? diff : -diff
+    })
 
   return (
     <div className="feed-overlay">
@@ -68,10 +77,16 @@ export default function Feed({ username }) {
           isLoading={createMutation.isPending}
         />
 
-        {isLoading && SKELETON_MOCK.map((i) => <PostCardSkeleton key={i} />)}
-        {isError && <p>Failed to load posts.</p>}
+        <FeedControls
+          search={search}
+          onSearchChange={setSearch}
+          sortOrder={sortOrder}
+          onSortChange={setSortOrder}
+        />
 
-        {posts.map((post) => (
+        {isLoading && SKELETON_MOCK.map((i) => <PostCardSkeleton key={i} />)}
+
+        {posts.length > 0 ? posts.map((post) => (
           <PostCard
             key={post.id}
             post={post}
@@ -79,7 +94,7 @@ export default function Feed({ username }) {
             onEdit={() => setEditingPost(post)}
             onDelete={() => setDeletingPost(post)}
           />
-        ))}
+        )) : <EmptyState filtered={!!search} />}
       </div>
 
       {editingPost && (
