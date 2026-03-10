@@ -22,6 +22,10 @@
   resize: vertical;
 }
 
+.form-field textarea {
+  min-height: 74px;
+}
+
 .form-field input:focus,
 .form-field textarea:focus {
   border-color: #000;

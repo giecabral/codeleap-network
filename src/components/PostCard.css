@@ -71,3 +71,18 @@
   line-height: 1.6;
   color: #333;
 }
+
+@media (max-width: 600px) {
+  .post-header {
+    padding: 16px;
+  }
+
+  .post-header h3 {
+    font-size: 18px;
+  }
+
+  .post-body {
+    padding: 16px;
+    gap: 12px;
+  }
+}

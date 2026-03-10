@@ -22,3 +22,18 @@
   display: flex;
   justify-content: flex-end;
 }
+
+@media (max-width: 600px) {
+  .create-post {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .create-post h4 {
+    font-size: 18px;
+  }
+
+  .create-post form {
+    gap: 12px;
+  }
+}
