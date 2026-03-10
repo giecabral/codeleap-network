@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { fetchPosts, createPost, updatePost, deletePost } from '../api.js'
 import { useToast } from '../hooks/useToast.js'
 import CreatePost from './CreatePost.jsx'
@@ -23,15 +23,17 @@ export default function Feed({ username, onLogout }) {
   const [sortOrder, setSortOrder] = useState('desc')
   const { toast, showToast } = useToast()
 
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['posts'],
+  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfiniteQuery({
+    queryKey: ['posts', 'infinite'],
     queryFn: fetchPosts,
+    initialPageParam: 'https://dev.codeleap.co.uk/careers/',
+    getNextPageParam: (lastPage) => lastPage.next ?? undefined,
   })
 
   const createMutation = useMutation({
     mutationFn: createPost,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['posts'] })
+      queryClient.invalidateQueries({ queryKey: ['posts', 'infinite'] })
       showToast('Post created!', 'success')
     },
     onError: () => showToast('Failed to create post. Try again.', 'error'),
@@ -40,7 +42,7 @@ export default function Feed({ username, onLogout }) {
   const updateMutation = useMutation({
     mutationFn: ({ id, title, content }) => updatePost(id, { title, content }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['posts'] })
+      queryClient.invalidateQueries({ queryKey: ['posts', 'infinite'] })
       setEditingPost(null)
       showToast('Post updated!', 'success')
     },
@@ -50,14 +52,15 @@ export default function Feed({ username, onLogout }) {
   const deleteMutation = useMutation({
     mutationFn: deletePost,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['posts'] })
+      queryClient.invalidateQueries({ queryKey: ['posts', 'infinite'] })
       setDeletingPost(null)
       showToast('Post deleted.', 'success')
     },
     onError: () => { showToast('Failed to delete post. Try again.', 'error'); setDeletingPost(null) },
   })
 
-  const posts = [...(data?.results ?? [])]
+  const allResults = data?.pages.flatMap((page) => page.results) ?? []
+  const posts = [...allResults]
     .filter((post) =>
       post.username.toLowerCase().includes(search.toLowerCase())
     )
@@ -98,7 +101,17 @@ export default function Feed({ username, onLogout }) {
             onEdit={() => setEditingPost(post)}
             onDelete={() => setDeletingPost(post)}
           />
-        )) : <EmptyState filtered={!!search} />}
+        )) : !isLoading && <EmptyState filtered={!!search} />}
+
+        {hasNextPage && (
+          <button
+            className="load-more-btn"
+            onClick={() => fetchNextPage()}
+            disabled={isFetchingNextPage}
+          >
+            {isFetchingNextPage ? 'Loading...' : 'Load more'}
+          </button>
+        )}
       </div>
 
       {editingPost && (
