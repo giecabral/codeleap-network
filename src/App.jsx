@@ -9,5 +9,5 @@ export default function App() {
     return <LoginModal onLogin={setUsername} />
   }
 
-  return <Feed username={username} />
+  return <Feed username={username} onLogout={() => setUsername('')} />
 }

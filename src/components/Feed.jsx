@@ -11,10 +11,11 @@ import EditModal from './EditModal.jsx'
 import EmptyState from './EmptyState.jsx'
 import Toast from './Toast.jsx'
 import './Feed.css'
+import LogoutIcon from '../../public/LogoutIcon.jsx'
 
 const SKELETON_MOCK = [1, 2]
 
-export default function Feed({ username }) {
+export default function Feed({ username, onLogout }) {
   const queryClient = useQueryClient()
   const [deletingPost, setDeletingPost] = useState(null)
   const [editingPost, setEditingPost] = useState(null)
@@ -67,7 +68,10 @@ export default function Feed({ username }) {
 
   return (
     <div className="feed-overlay">
-      <header>CodeLeap Network</header>
+      <header>
+        <span>CodeLeap Network</span>
+        <button className="logout-btn" onClick={onLogout}><LogoutIcon /></button>
+      </header>
       <div className="feed">
         <CreatePost
           username={username}
