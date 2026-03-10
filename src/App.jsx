@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import LoginModal from './components/LoginModal.jsx'
-import Feed from './components/Feed.jsx'
+import LoginModal from './components/post/LoginModal.jsx'
+import Feed from './components/post/Feed.jsx'
 
 export default function App() {
   const [username, setUsername] = useState('')

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import FormField from './FormField.jsx'
+import FormField from '../ui/FormField.jsx'
 import './EditModal.css'
 
 export default function EditModal({ post, onClose, onSave, isLoading }) {

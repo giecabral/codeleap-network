@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import FormField from './FormField.jsx'
+import FormField from '../ui/FormField.jsx'
 import './CreatePost.css'
 
 export default function CreatePost({ username, onSubmit, isLoading }) {

@@ -1,6 +1,6 @@
-import EditIcon from '../../public/EditIcon'
-import TrashIcon from '../../public/TrashIcon'
-import { timeAgo } from '../utils/date'
+import EditIcon from '../../assets/EditIcon'
+import TrashIcon from '../../assets/TrashIcon'
+import { timeAgo } from '../../utils/date'
 import './PostCard.css'
 
 

@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { fetchPosts, createPost, updatePost, deletePost } from '../api.js'
-import { useToast } from '../hooks/useToast.js'
+import { fetchPosts, createPost, updatePost, deletePost } from '../../api/api.js'
+import { useToast } from '../../hooks/useToast.js'
 import CreatePost from './CreatePost.jsx'
 import PostCard from './PostCard.jsx'
 import PostCardSkeleton from './PostCardSkeleton.jsx'
 import FeedControls from './FeedControls.jsx'
 import DeleteModal from './DeleteModal.jsx'
 import EditModal from './EditModal.jsx'
-import EmptyState from './EmptyState.jsx'
-import Toast from './Toast.jsx'
+import EmptyState from '../ui/EmptyState.jsx'
+import Toast from '../ui/Toast.jsx'
 import './Feed.css'
-import LogoutIcon from '../../public/LogoutIcon.jsx'
+import LogoutIcon from '../../assets/LogoutIcon.jsx'
 
 const SKELETON_MOCK = [1, 2]
 
