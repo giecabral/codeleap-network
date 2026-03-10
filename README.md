@@ -3,15 +3,16 @@
 A social feed application built as a frontend engineering test for CodeLeap. Users can create, edit, and delete posts on a shared network.
 
 ## Demo
+[https://drive.google.com/file/d/1taiPrsnFU09lZ5h6tCI-iSUKhs28PdgP/view?usp=sharing
+](Codeleap Video Demo)
+![codeleap-mobile](https://github.com/user-attachments/assets/bf6499bf-bbd3-4429-9403-40bfe38734c2)
 
-<!-- Add your demo video here once recorded -->
-> 📹 Demo video coming soon.
 
 ## Live App
 
 The app is deployed on Vercel and accessible at:
 
-> 🔗 (https://codeleap-network-two.vercel.app/)
+> 🔗 https://codeleap-network-two.vercel.app/
 
 ## Tech Stack
 
